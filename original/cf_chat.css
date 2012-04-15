@@ -70,8 +70,3 @@ div#open_bar { display: none ! important; }
 tr.propane_alert_match:not(.propane_search) td.body { background-color: #D9FAD9 ! important; }
 tr.propane_hidden_enterleave { display: none ! important; }
 
-/* Make the bot appear as green so it stands out */
-tr.text_message.message.user_1172315 { 
-  color: green !important;
-  font-weight: bold;
-}
