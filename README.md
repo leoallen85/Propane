@@ -7,7 +7,7 @@ Will extend your Propane experience with following features
 * GitHub Info puller
 * Syntax Highlighting (use it with *[ruby]puts "abc"* - supports: as3|actionscript3|bash|shell|cf|coldfusion|c-sharp|csharp|cpp|c|css|delphi|pas|pascal|diff|patch|erl|erlang|groovy|js|jscript|javascript|java|jfx|javafx|perl|pl|php|plain|text|ps|powershell|py|python|rails|ror|ruby|scala|sql|vb|vbnet|xml|xhtml|sxlt|html)
 
-Run enhance-propane.sh to automatically get everything set up.
+Run *enhance-propane.sh* to automatically get everything set up.
 
 *WARNING*
 
