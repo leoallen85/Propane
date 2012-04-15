@@ -9,7 +9,7 @@ if (highlighter)
       for(var i = 0; i < messages.length; i++) {
         this.detectSyntax(messages[i]);
       }
-      SyntaxHighlighter.all();
+      SyntaxHighlighter.highlight();
     },
 
     onMessagesInserted: function(messages) {
@@ -17,7 +17,7 @@ if (highlighter)
       for (var i = 0; i < messages.length; i++) {
         this.detectSyntax(messages[i]);
       }
-      SyntaxHighlighter.all();
+      SyntaxHighlighter.highlight();
 
       if (scrolledToBottom) {
         this.chat.windowmanager.scrollToBottom();
@@ -26,18 +26,18 @@ if (highlighter)
 
     onMessageAccepted: function(message) {
       this.detectSyntax(message);
-      SyntaxHighlighter.all();
+      SyntaxHighlighter.highlight();
     },
 
     detectSyntax: function(message) {
-      if (!message.pending() && message.kind === 'text') {
+      if (!message.pending() && (message.kind == 'text' || message.kind == 'paste')) {
         message.bodyCell.update(
           message.bodyCell.innerHTML.replace(
             /\n/g, '!@#'
           ).replace(
             /<code>(.+)<\/code>/, '$1'
           ).replace(
-            /\[(as3|actionscript3|bash|shell|cf|coldfusion|c-sharp|csharp|cpp|c|css|delphi|pas|pascal|diff|patch|erl|erlang|groovy|js|jscript|javascript|java|jfx|javafx|perl|pl|php|plain|text|ps|powershell|py|python|rails|ror|ruby|scala|sql|vb|vbnet|xml|xhtml|sxlt|html)\](.+)$/, '<pre class="brush: $1">CODE $2</pre>'
+            /\[(as3|actionscript3|bash|shell|cf|coldfusion|c-sharp|csharp|cpp|c|css|delphi|pas|pascal|diff|patch|erl|erlang|groovy|js|jscript|javascript|java|jfx|javafx|perl|pl|php|plain|text|ps|powershell|py|python|rails|ror|ruby|scala|sql|vb|vbnet|xml|xhtml|sxlt|html)\](.+)$/, '<pre class="brush: $1">$2</pre>'
           ).replace(
             /\!\@\#/g, "\n"
           )
