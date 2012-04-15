@@ -19,7 +19,6 @@
 
 var displayAvatars = true;
 
-
 /* 
   Display avatars in the chat view - based on code originally by @tmm1
 */

@@ -1,4 +1,3 @@
-//
 // Begin anonymous function. This is used to contain local scope variables without polutting global scope.
 //
 if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function() { 

@@ -2,7 +2,6 @@
 Add github repo descriptions to your Campfire rooms in Propane (propaneapp.com).
 Adapted from protocool's https://gist.github.com/825404
 */
-
 var githubber = true;
 if(githubber){
   // github repo info inline

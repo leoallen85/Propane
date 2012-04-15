@@ -1,4 +1,7 @@
-/* Make the bot appear as green so it stands out */
+/* Make the bot appear as green so it stands out
+	Change the user id to your bot's user account
+*/
+
 tr.text_message.message.user_1172315 { 
   color: green !important;
   font-weight: bold;

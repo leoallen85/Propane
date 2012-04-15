@@ -6,7 +6,6 @@
 // including support for additional syntax, flags, and methods
 
 var XRegExp;
-
 if (XRegExp) {
     // Avoid running twice, since that would break references to native globals
     throw Error("can't load XRegExp twice in the same frame");

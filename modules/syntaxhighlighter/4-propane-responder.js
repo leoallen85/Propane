@@ -1,4 +1,5 @@
 /* Add Syntaxhighlighter to Campfire */
+
 var highlighter = true;
 if (highlighter)
 {
