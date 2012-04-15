@@ -1,48 +1,55 @@
-function loadjscssfile(filename, filetype){
-  var fileref;
-  if (filetype=="js"){ //if filename is a external JavaScript file
-    fileref=document.createElement('script');
-    fileref.setAttribute("type","text/javascript");
-    fileref.setAttribute("src", filename);
-  }
-  else if (filetype=="css"){ //if filename is an external CSS file
-    fileref=document.createElement("link");
-    fileref.setAttribute("rel", "stylesheet");
-    fileref.setAttribute("type", "text/css");
-    fileref.setAttribute("href", filename);
-  }
-  if (fileref)
-    document.getElementsByTagName("head")[0].appendChild(fileref);
-}
-function parse_for_highlight()
+/* Add Syntaxhighlighter to Campfire */
+var highlighter = true;
+if (highlighter)
 {
-  var to_parse = [];
-  var divs = document.getElementsByTagName('div');
-  var n = 0;
-  for (var o=0; o<divs.length; o++)
-  {
-    if (divs[o].getAttribute('class') == 'body')
-    {
-      if (!divs[o].getAttribute('parsed'))
-      {
-        divs[o].setAttribute('parsed', 1);
-        divs[o].innerHTML = divs[o].innerHTML.replace(/\n/g, '!@#').replace(
+  Campfire.Highlighter = Class.create({
+    initialize: function(chat) {
+      this.chat = chat;
+      var messages = this.chat.transcript.messages;
+      for(var i = 0; i < messages.length; i++) {
+        this.detectSyntax(messages[i]);
+      }
+      SyntaxHighlighter.all();
+    },
+
+    onMessagesInserted: function(messages) {
+      var scrolledToBottom = this.chat.windowmanager.isScrolledToBottom();
+      for (var i = 0; i < messages.length; i++) {
+        this.detectSyntax(messages[i]);
+      }
+      SyntaxHighlighter.all();
+
+      if (scrolledToBottom) {
+        this.chat.windowmanager.scrollToBottom();
+      }
+    },
+
+    onMessageAccepted: function(message) {
+      this.detectSyntax(message);
+      SyntaxHighlighter.all();
+    },
+
+    detectSyntax: function(message) {
+      if (!message.pending() && message.kind === 'text') {
+        message.bodyCell.update(
+          message.bodyCell.innerHTML.replace(
+            /\n/g, '!@#'
+          ).replace(
             /<code>(.+)<\/code>/, '$1'
-          ).replace(/\[(ruby|js|html)\](.+)$/,
-            '<pre class="brush: $1">$2</pre>').replace(/\!\@\#/g, "\n");
-        n++;
+          ).replace(
+            /\[(as3|actionscript3|bash|shell|cf|coldfusion|c-sharp|csharp|cpp|c|css|delphi|pas|pascal|diff|patch|erl|erlang|groovy|js|jscript|javascript|java|jfx|javafx|perl|pl|php|plain|text|ps|powershell|py|python|rails|ror|ruby|scala|sql|vb|vbnet|xml|xhtml|sxlt|html)\](.+)$/, '<pre class="brush: $1">CODE $2</pre>'
+          ).replace(
+            /\!\@\#/g, "\n"
+          )
+        );
       }
     }
-  }
-  if (n)
-  {
-    SyntaxHighlighter.highlight();
-  }
+  });
+
+  Campfire.Responders.push("Highlighter");
+  window.chat.installPropaneResponder("Highlighter", "highlighter");
 }
 
-loadjscssfile("http://188.40.78.147/campfire.js", "js");
-loadjscssfile("http://188.40.78.147/campfire.css", "css");
-window.setTimeout('parse_for_highlight()', '500');
 
 /*
 Add github repo descriptions to your Campfire rooms in Propane (propaneapp.com).
