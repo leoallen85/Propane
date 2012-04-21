@@ -1,6 +1,6 @@
 # Enhancements to Propane
 
-Will extend your Propane experience with following features
+Will extend your PropaneApp (http://propaneapp.com/) experience with following features
 
 * Inline Avatars (set your picture up at campfirenow.com)
 * Inline CloudApp Image
